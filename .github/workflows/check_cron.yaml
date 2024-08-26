@@ -30,7 +30,7 @@ jobs:
             ssh=$(echo "$account" | jq -r '.ssh')
 
             echo "echo \"Executing for $username@$ssh\"" >> sshpass.sh
-            echo "sshpass -p '$password' ssh -o StrictHostKeyChecking=no '$username@$ssh' 'date +\"%Y-%m-%d %H:%M:%S\" >> ~/alive.txt'" >> sshpass.sh
+            echo "sshpass -p '$password' ssh -o StrictHostKeyChecking=no '$username@$ssh' 'TZ=\"Asia/Shanghai\" date +\"%Y-%m-%d %H:%M:%S\" >> ~/alive.txt'" >> sshpass.sh
           done < <(jq -c '.[]' accounts.json)
           chmod +x sshpass.sh
 
